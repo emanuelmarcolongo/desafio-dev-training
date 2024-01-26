@@ -14,8 +14,21 @@ const getSheetData = async () => {
   return { title, classInfo, parameters, studentsInfo };
 };
 
-export const sheetService = {
-  getSheetData,
+const updateSheetData = async (aditionalData) => {
+  const { googleSheets, auth, spreadsheetId } = await authSheet();
+
+  const updateValues = await googleSheets.spreadsheets.values.append({
+    auth,
+    spreadsheetId,
+    range: "engenharia_de_software!G4:H27",
+    valueInputOption: "USER_ENTERED",
+    resource: {
+      values: aditionalData,
+    },
+  });
 };
 
-getSheetData;
+export const sheetService = {
+  getSheetData,
+  updateSheetData,
+};

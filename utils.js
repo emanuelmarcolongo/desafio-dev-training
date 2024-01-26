@@ -1,15 +1,6 @@
-import { sheetService } from "./services.js";
-
-const handleStudentInfo = async () => {
-  const { studentsInfo } = await sheetService.getSheetData();
-
-  const updatedStudentInfo = calculateStudentGrade(studentsInfo);
-
-  return updatedStudentInfo;
-};
-
 const calculateStudentGrade = (studentsInfo) => {
   const totalClasses = 60;
+  const aditionalData = [];
   const updatedStudentInfo = studentsInfo.forEach((student) => {
     const [id, name, abscences, grade1, grade2, grade3] = student;
 
@@ -21,18 +12,19 @@ const calculateStudentGrade = (studentsInfo) => {
     const studentAverage = Math.ceil(
       (parseInt(grade1) + parseInt(grade2) + parseInt(grade3)) / 3
     );
-    if (studentAverage >= 50 && studentAverage < 70) {
-      finalAproval = (100 - studentAverage) / 2;
+    if (studentAverage >= 50 && studentAverage < 70 && situation === "") {
+      finalAproval = 100 - studentAverage;
       if (situation === "") situation = "Exame Final";
     }
 
+    if (studentAverage < 50 && situation === "") situation = "Reprovado";
+
     if (studentAverage >= 70 && situation === "") situation = "Aprovado";
 
-    student.push(situation);
-    student.push(finalAproval);
+    aditionalData.push([situation, finalAproval]);
   });
 
-  return studentsInfo;
+  return aditionalData;
 };
 
-export { handleStudentInfo };
+export const utils = { calculateStudentGrade };
