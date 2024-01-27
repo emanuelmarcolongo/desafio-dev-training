@@ -1,4 +1,4 @@
-import { connectionSheet } from "./database/index.js";
+import { connectionSheet } from "../database/index.js";
 
 const getSheetData = async () => {
   const { googleSheets, auth, spreadsheetId } = await connectionSheet();
@@ -34,7 +34,7 @@ const updateSheetData = async (aditionalData) => {
   });
 };
 
-export const sheetService = {
+export const sheetRepository = {
   getSheetData,
   updateSheetData,
 };
