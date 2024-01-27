@@ -1,7 +1,7 @@
-import { authSheet } from "./sheetConnection.js";
+import { connectionSheet } from "./database/index.js";
 
 const getSheetData = async () => {
-  const { googleSheets, auth, spreadsheetId } = await authSheet();
+  const { googleSheets, auth, spreadsheetId } = await connectionSheet();
 
   const rows = await googleSheets.spreadsheets.values.get({
     auth,
@@ -15,7 +15,7 @@ const getSheetData = async () => {
 };
 
 const updateSheetData = async (aditionalData) => {
-  const { googleSheets, auth, spreadsheetId } = await authSheet();
+  const { googleSheets, auth, spreadsheetId } = await connectionSheet();
 
   const clearValues = await googleSheets.spreadsheets.values.clear({
     auth,

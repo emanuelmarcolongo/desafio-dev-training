@@ -1,6 +1,6 @@
 import { google } from "googleapis";
 
-export const authSheet = async () => {
+export const connectionSheet = async () => {
   const spreadsheetId = "1eLKLi7GafHUjGOztqxHOqGxRoq3Gx2v9hPI88_vV1uc";
 
   const auth = new google.auth.GoogleAuth({
