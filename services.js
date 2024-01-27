@@ -17,7 +17,13 @@ const getSheetData = async () => {
 const updateSheetData = async (aditionalData) => {
   const { googleSheets, auth, spreadsheetId } = await authSheet();
 
-  const updateValues = await googleSheets.spreadsheets.values.append({
+  const clearValues = await googleSheets.spreadsheets.values.clear({
+    auth,
+    spreadsheetId,
+    range: "engenharia_de_software!G4:H27",
+  });
+
+  const appendValues = await googleSheets.spreadsheets.values.append({
     auth,
     spreadsheetId,
     range: "engenharia_de_software!G4:H27",
