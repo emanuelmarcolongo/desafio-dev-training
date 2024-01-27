@@ -27,4 +27,4 @@ const calculateStudentGrade = (studentsInfo) => {
   return aditionalData;
 };
 
-export const utils = { calculateStudentGrade };
+export const libs = { calculateStudentGrade };
